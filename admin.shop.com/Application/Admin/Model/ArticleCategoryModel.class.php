@@ -22,7 +22,7 @@ class ArticleCategoryModel extends Model
         ['name', '', '文章类已存在', self::EXISTS_VALIDATE, 'unique'],
         ['status', '0,1', '状态不合法', self::EXISTS_VALIDATE, 'in'],
         ['sort', 'number', '排序必须为数字'],
-        ['is_help', '0,1', '帮助不合法', self::EXISTS_VALIDATE, 'in'],
+        ['is_help', '0,1', '是否帮助类文档', self::EXISTS_VALIDATE, 'in'],
     ];
 
 

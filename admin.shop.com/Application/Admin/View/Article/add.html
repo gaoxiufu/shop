@@ -19,15 +19,34 @@
     <form action="{:U()}" method="post" name="theForm" enctype="multipart/form-data">
         <table width="100%" id="general-table">
             <tr>
-                <td class="label">分类名称:</td>
+                <td class="label">文章名称:</td>
                 <td>
                     <input type='text' name='name' maxlength="20" value='{$name}' size='27' /> <font color="red">*</font>
                 </td>
             </tr>
             <tr>
-                <td class="label">分类介绍:</td>
+                <td class="label">文章介绍:</td>
                 <td>
-                    <input type='text' name='intro' maxlength="20" value='{$intro}' size='27' />
+                    <!--<input type='text' name='intro' maxlength="20" value='{$intro}' size='27' />-->
+                    <textarea name="intro" cols="60" rows="3">{$intro}</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">文章类别:</td>
+                <td>
+                    <select name="article_category_id" id="" maxlength="20" >
+                        <option value="">请选择文章类别</option>
+                        <foreach name="types" item="type">
+                            <option value="{$type.id}">{$type.name}</option>
+                        </foreach>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">文章内容:</td>
+                <td>
+                    <textarea name="content" cols="60" rows="10">111</textarea>
+
                 </td>
             </tr>
             <tr>
@@ -43,17 +62,10 @@
                     <input type="radio" name="status" value="0" class="status" /> 否
                 </td>
             </tr>
-            <tr>
-                <td class="label">是否是帮助文档:</td>
-                <td>
-                    <input type="radio" name="is_help" value="1" class="help" /> 是
-                    <input type="radio" name="is_help" value="0" class="help" /> 否
-                </td>
-            </tr>
 
         </table>
         <div class="button-div">
-            <input type="hidden" value="{$id}" name="id">
+            <!--<input type="hidden" value="{$id}" name="id">-->
             <input type="submit" value=" 确定 " />
             <input type="reset" value=" 重置 " />
         </div>

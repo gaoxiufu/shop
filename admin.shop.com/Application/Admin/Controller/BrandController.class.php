@@ -15,7 +15,7 @@ class BrandController extends Controller
 {
     /**
      * 自动创建model对象
-     * @var \Admin\Model\SupplierModel
+     * @var \Admin\Model\BrandModel
      */
     private $model = null;
 
