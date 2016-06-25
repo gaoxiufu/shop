@@ -26,3 +26,4 @@ function getError(\Think\Model $model)
     return $html;
 
 }
+

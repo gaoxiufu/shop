@@ -10,22 +10,22 @@
 </head>
 <body>
 <h1>
-    <span class="action-span"><a href="__GROUP__/Category/categoryList">商品分类</a></span>
+    <span class="action-span"><a href="__GROUP__/Category/categoryList">品牌分类</a></span>
     <span class="action-span1"><a href="__GROUP__">ECSHOP 管理中心</a></span>
-    <span id="search_id" class="action-span1"> - 添加供货商 </span>
+    <span id="search_id" class="action-span1"> - 添加品牌 </span>
     <div style="clear:both"></div>
 </h1>
 <div class="main-div">
     <form action="{:U()}" method="post" name="theForm" enctype="multipart/form-data">
         <table width="100%" id="general-table">
             <tr>
-                <td class="label">供应商名称:</td>
+                <td class="label">分类名称:</td>
                 <td>
                     <input type='text' name='name' maxlength="20" value='{$name}' size='27' /> <font color="red">*</font>
                 </td>
             </tr>
             <tr>
-                <td class="label">供货商描述:</td>
+                <td class="label">分类介绍:</td>
                 <td>
                     <input type='text' name='intro' maxlength="20" value='{$intro}' size='27' />
                 </td>
@@ -37,10 +37,17 @@
                 </td>
             </tr>
             <tr>
-                <td class="label">是否显示</td>
+                <td class="label">是否显示:</td>
                 <td>
-                    <input type="radio" name="status" value="1" class="status" /> 是
-                    <input type="radio" name="status" value="0" class="status" /> 否(当供货商下还没有商品的时候，首页及分类页的供货商区将不会显示该供货商。)
+                    <input type="radio" name="status" value="1" class="status" checked="checked"/> 是
+                    <input type="radio" name="status" value="0" class="status" /> 否
+                </td>
+            </tr>
+            <tr>
+                <td class="label">是否是帮助文档:</td>
+                <td>
+                    <input type="radio" name="is_help" value="1" class="help" /> 是
+                    <input type="radio" name="is_help" value="0" class="help" /> 否
                 </td>
             </tr>
 
@@ -61,6 +68,7 @@
 <script>
     $(function(){
         $('.status').val([{$status}]);
+        $('.help').val([{$is_help}]);
     });
 
 </script>
