@@ -4,7 +4,7 @@
  * User: Administrator
  * Date: 2016/6/24
  * Time: 16:47
- * https://note.wiz.cn/pages/manage/biz/applyInvited.html?code=ucv7m6 未知比较群组
+ * https://note.wiz.cn/pages/manage/biz/applyInvited.html?code=ucv7m6 为知笔记群组
  */
 
 namespace Admin\Controller;
@@ -28,10 +28,10 @@ class SupplierController extends Controller
             $cond['name'] = ['like', '%' . $name . '%'];
         }
         $model = D('Supplier');
-        $rows = $model->where($cond)->select();
+        // $rows = $model->where($cond)->select();
         // $rows = $model->select();
-        //$rows = $model->getPage($cond);
-        $this->assign('rows', $rows);
+        $rows = $model->getPage($cond);// 获取到的是混合数组
+        $this->assign($rows);
         $this->display();
     }
 
@@ -69,14 +69,14 @@ class SupplierController extends Controller
 
         $model = D('Supplier');
         if (IS_POST) {
-            if($model->create()===false){
+            if ($model->create() === false) {
                 $this->error(getError($model));
             }
-          //  dump($model->data());
-            if($model->save()===false){
+            //  dump($model->data());
+            if ($model->save() === false) {
                 $this->error(getError($model));
-            }else{
-                $this->success('修改成功',U('index'));
+            } else {
+                $this->success('修改成功', U('index'));
             }
 
         } else {
@@ -91,18 +91,19 @@ class SupplierController extends Controller
      * 逻辑删除信息
      * @param $id
      */
-    public function remove($id){
-        $model=D('Supplier');
-        $data=[
-            'id'=>$id,
-            'status'=>-1,
-            'name'=>['exp','concat(name,"_del")']
+    public function remove($id)
+    {
+        $model = D('Supplier');
+        $data = [
+            'id'     => $id,
+            'status' => -1,
+            'name'   => ['exp', 'concat(name,"_del")']
         ];
 
-        if($model->setField($data)===false){
+        if ($model->setField($data) === false) {
             $this->error(getError($model));
-        }else{
-            $this->success('删除成功',U('index'));
+        } else {
+            $this->success('删除成功', U('index'));
         }
 
     }

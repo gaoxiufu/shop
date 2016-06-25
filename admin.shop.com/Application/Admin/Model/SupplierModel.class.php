@@ -10,6 +10,7 @@ namespace Admin\Model;
 
 
 use Think\Model;
+use Think\Page;
 
 class SupplierModel extends Model
 {
@@ -20,7 +21,7 @@ class SupplierModel extends Model
     protected $_validate = [
         ['name', 'require', '供货商名称不能为空'],
         ['name', '', '供货商已存在', self::EXISTS_VALIDATE, 'unique'],
-        ['status', '0,1', '供货商状态不合法', self::EXISTS_VALIDATE,'in'],
+        ['status', '0,1', '供货商状态不合法', self::EXISTS_VALIDATE, 'in'],
         ['sort', 'number', '排序必须为数字'],
     ];
 
@@ -31,12 +32,13 @@ class SupplierModel extends Model
      */
     public function getPage($cond)
     {
-        $count = $this->where($cond)->select();
-        $page = new \Think\Page($count, 2);
-        //$html = $page->show();
-        //  dump($html);
-        return $this->where($cond)->page(I('get.p', 1), 2)->select();
-        //return compact(['rows','html']);
+        $count = $this->where($cond)->count();  // 获取中条数
+        // 分页工具
+        $page = new  \Think\Page($count, 2);
+        $page->setConfig('theme', '%HEADER% %FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%');
+        $html = $page->show();
+        $rows = $this->where($cond)->page(I('get.p', 1), 2)->select();
+        return compact(['rows', 'html']);
     }
 
 
