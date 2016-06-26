@@ -28,7 +28,7 @@ class ArticleModel extends Model
     // 自动完成
     protected $_auto = [
         // ['password','md5',self::MODEL_INSERT,'function','register'],
-        ['inputtime', NOW_TIME,self::MODEL_INSERT],
+        ['inputtime', NOW_TIME, self::MODEL_INSERT],
     ];
 
     /**
@@ -57,7 +57,7 @@ class ArticleModel extends Model
         // $rows = $this->select();
         // 循环文章类别表和文章表，如果文章类别ID相等，就将文章类别名赋值给category字段
         foreach ($rows as &$row) {
-            $row['category'] = $model->getFieldById($row['article_category_id'],'name');
+            $row['category'] = $model->getFieldById($row['article_category_id'], 'name');
 //            foreach ($datas as $data) {
 //                if ($data['id'] == $row['article_category_id']) {
 //                    $row['category'] = $data['name'];
@@ -118,15 +118,15 @@ class ArticleModel extends Model
         $row = $this->find($id);
         // 获取文章分类
         $type_model = M('article_category');
-        $row['category'] = $type_model->getFieldById($row['article_category_id'],'name');
-
-//        $types = $type_model->select();
+        $row['category'] = $type_model->getFieldById($row['article_category_id'], 'name');
+        $types = $type_model->select();
 //        foreach ($types as $type) {
 //
 //            if ($type['id'] == $row['article_category_id']) {
 //                $row['category'] = $type['name'];
 //            }
 //        }
+
         // 获取文章内容
         $content_model = M('article_content');
         $content = $content_model->find($id);
@@ -170,7 +170,8 @@ class ArticleModel extends Model
         $this->commit();
     }
 
-    public function deleteArticle($id){
+    public function deleteArticle($id)
+    {
         $this->delete($id);
         // 实例化文章内容表
         $content_model = M('ArticleContent');
