@@ -112,7 +112,7 @@ class BrandController extends Controller
         if($this->model->setField($cont)===false){
             $this->error(getError($this->model));
         }else{
-            $this->success('删除成功');
+            $this->success('删除成功',U('index'));
         }
     }
 

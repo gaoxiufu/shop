@@ -11,7 +11,7 @@
 <body>
 <h1>
     <span class="action-span"><a href="__GROUP__/Category/categoryList">品牌分类</a></span>
-    <span class="action-span1"><a href="__GROUP__">ECSHOP 管理中心</a></span>
+    <span class="action-span1"><a href="{:U(index)}">ECSHOP 管理中心</a></span>
     <span id="search_id" class="action-span1"> - 文章修改 </span>
     <div style="clear:both"></div>
 </h1>
@@ -34,7 +34,7 @@
                 <td class="label">文章类别:</td>
                 <td>
                     <select name="article_category_id" id="" maxlength="20" >
-                        <option value="">请选择类别
+                        <option value="{$row.article_category_id}">*{$row['category']}
                         </option>
                         <foreach name="types" item="type">
                             <option value="{$type.id}">{$type.name}</option>
@@ -65,7 +65,7 @@
 
         </table>
         <div class="button-div">
-            <input type="hidden" value="{$id}" name="id">
+            <input type="hidden" value="{$row.id}" name="id">
             <input type="submit" value=" 确定 " />
             <input type="reset" value=" 重置 " />
         </div>

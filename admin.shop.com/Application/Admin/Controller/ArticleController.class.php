@@ -44,24 +44,62 @@ class ArticleController extends Controller
      */
     public function add()
     {
+        $content = I('post.content'); // 获取文章内容
         if (IS_POST) {
             if ($this->model->create() === false) {
                 $this->error(getError($this->model));
             }
-
-            if ($this->model->add() === false) {
+            if ($this->model->addArticle($content) === false) {
                 $this->error(getError($this->model));
             } else {
                 $this->success('文章添加成功！', U('index'));
             }
 
         } else {
+            // 回显文章类别
             $type_model = M('ArticleCategory');
             $types = $type_model->select();
             $this->assign('types', $types);
             $this->display('add');
         }
+    }
 
+    /**
+     * 修改文章信息
+     * @param $id
+     */
+    public function edit($id)
+    {
+        $content = I('post.content'); // 获取文章内容
+        if (IS_POST) {
+            if ($this->model->create() === false) {
+                $this->error(getError($this->model));
+            }
+            if ($this->model->saveArticle($content) === false) {
+                $this->error(getError($this->model));
+            } else {
+                $this->success('修改成功', U('index'));
+            }
+
+
+        } else {
+            // 回显数据
+            $datas = $this->model->selectArticle($id);
+            $types = $datas['types'];
+            $this->assign($datas);
+            $this->assign('types', $types);
+            $this->display();
+        }
+    }
+
+    public function remove($id)
+    {
+        $result = $this->model->deleteArticle($id);
+        if ($result === false) {
+            $this->error('删除失败');
+        } else {
+            $this->success('删除成功', U('index'));
+        }
     }
 
 }
